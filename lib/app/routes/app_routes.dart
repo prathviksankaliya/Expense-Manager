@@ -6,6 +6,6 @@ class AppRoutes {
   static const String splash = "/";
 
   static Map<String, Widget Function(BuildContext)> appRoutes = {
-    splash: (context) => const SplashScreen(),
+    splash: (context) => const ThemeTestScreen(),
   };
 }

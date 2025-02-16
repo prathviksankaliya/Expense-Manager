@@ -1,6 +1,5 @@
-import 'package:expense_manager/app/core/common/common_functions.dart';
+import 'package:expense_manager/app/core/theme/app_theme.dart';
 import 'package:expense_manager/app/core/utils/app_colors.dart';
-import 'package:expense_manager/app/core/utils/app_fonts.dart';
 import 'package:expense_manager/app/core/utils/app_strings.dart';
 import 'package:expense_manager/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () => Navigator.pushNamed(context, AppRoutes.onBoardingScreen));
+    Future.delayed(Duration(seconds: 3), () => Navigator.pushReplacementNamed(context, AppRoutes.onBoardingScreen));
   }
 
   @override
@@ -35,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Lottie.asset(AppStrings.logoAnimation, width: 280, height: 280, animate: true),
                 Text(
                   AppStrings.appName,
-                  style: AppFonts.semiBold(fontSize: 32),
+                  style: AppTheme.textTheme.displayLarge,
                 )
               ],
             )),

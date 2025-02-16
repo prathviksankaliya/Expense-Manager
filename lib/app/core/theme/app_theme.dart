@@ -1,50 +1,58 @@
+import 'package:expense_manager/app/core/theme/app_button_theme.dart';
+import 'package:expense_manager/app/core/theme/app_text_theme.dart';
+import 'package:expense_manager/app/core/theme/app_textfield_theme.dart';
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 
 class AppTheme {
-  /// Light Theme
-  static final ThemeData lightTheme = ThemeData(
-    useMaterial3: true,
+
+  /// This getter will dynamically return the correct TextTheme based on brightness.
+  static TextTheme get textTheme {
+    final Brightness brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    return brightness == Brightness.dark
+        ? AppTextTheme.darkTextTheme
+        : AppTextTheme.lightTextTheme;
+  }
+
+  /// Get the correct ButtonTheme based on system brightness.
+  static ElevatedButtonThemeData get buttonTheme {
+    final Brightness brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    return brightness == Brightness.dark
+        ? AppButtonTheme.darkButtonTheme
+        : AppButtonTheme.lightButtonTheme;
+  }
+
+  /// Get the correct InputDecorationTheme based on system brightness.
+  static InputDecorationTheme get textFieldTheme {
+    final Brightness brightness =
+        WidgetsBinding.instance.platformDispatcher.platformBrightness;
+    return brightness == Brightness.dark
+        ? AppTextFieldTheme.darkInputDecorationTheme
+        : AppTextFieldTheme.lightInputDecorationTheme;
+  }
+
+  // Light Theme
+  static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.backgroundLight,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primary,
-      foregroundColor: Colors.white,
-      elevation: 0,
-    ),
-    colorScheme: const ColorScheme.light(
-      primary: AppColors.primary,
-      secondary: AppColors.secondary,
-      background: AppColors.backgroundLight,
-      surface: AppColors.surfaceLight,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: AppColors.textPrimaryLight),
-      bodyMedium: TextStyle(color: AppColors.textSecondaryLight),
-    ),
+    cardColor: AppColors.surfaceLight,
+    textTheme: AppTextTheme.lightTextTheme,
+    elevatedButtonTheme: AppButtonTheme.lightButtonTheme,
+    inputDecorationTheme: AppTextFieldTheme.lightInputDecorationTheme,
   );
 
-  /// Dark Theme
-  static final ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
+  // Dark Theme
+  static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     primaryColor: AppColors.primaryDark,
     scaffoldBackgroundColor: AppColors.backgroundDark,
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primaryDark,
-      foregroundColor: Colors.white,
-      elevation: 0,
-    ),
-    colorScheme: const ColorScheme.dark(
-      primary: AppColors.primaryDark,
-      secondary: AppColors.secondaryDark,
-      // background: AppColors.backgroundDark,
-      surface: AppColors.surfaceDark,
-    ),
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: AppColors.textPrimaryDark),
-      bodyMedium: TextStyle(color: AppColors.textSecondaryDark),
-    ),
+    cardColor: AppColors.surfaceDark,
+    textTheme: AppTextTheme.darkTextTheme,
+    elevatedButtonTheme: AppButtonTheme.darkButtonTheme,
+    inputDecorationTheme: AppTextFieldTheme.darkInputDecorationTheme
+
   );
 }

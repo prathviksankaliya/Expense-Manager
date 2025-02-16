@@ -1,5 +1,3 @@
-import 'package:expense_manager/app/core/theme/app_theme.dart';
-import 'package:expense_manager/app/core/utils/app_colors.dart';
 import 'package:expense_manager/app/core/utils/app_strings.dart';
 import 'package:expense_manager/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +11,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isRemove = false;
-
   @override
   void initState() {
     super.initState();
@@ -24,9 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isRemove
-          ? Container()
-          : Center(
+      body: Center(
               child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 Lottie.asset(AppStrings.logoAnimation, width: 280, height: 280, animate: true),
                 Text(
                   AppStrings.appName,
-                  style: AppTheme.textTheme.displayLarge,
+                  style: Theme.of(context).textTheme.displayLarge,
                 )
               ],
             )),

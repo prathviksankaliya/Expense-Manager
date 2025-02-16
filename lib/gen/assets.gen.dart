@@ -71,12 +71,15 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/expenses.svg
   SvgGenImage get expenses => const SvgGenImage('assets/svgs/expenses.svg');
 
+  /// File path: assets/svgs/goals.svg
+  SvgGenImage get goals => const SvgGenImage('assets/svgs/goals.svg');
+
   /// File path: assets/svgs/setting_man.svg
   SvgGenImage get settingMan =>
       const SvgGenImage('assets/svgs/setting_man.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [chart, expenses, settingMan];
+  List<SvgGenImage> get values => [chart, expenses, goals, settingMan];
 }
 
 class Assets {

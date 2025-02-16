@@ -1,10 +1,14 @@
 import 'package:expense_manager/app/core/utils/app_colors.dart';
 import 'package:expense_manager/app/core/utils/app_fonts.dart';
+import 'package:expense_manager/app/data/common/bloc/theme_bloc/theme_bloc.dart';
+import 'package:expense_manager/app/data/provider/data_provider.dart';
+import 'package:expense_manager/app/features/onboarding_screen/models/onboarding_model.dart';
 import 'package:expense_manager/app/features/onboarding_screen/widgets/dot_indicators.dart';
 import 'package:expense_manager/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../core/theme/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../bloc/onboarding_bloc.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -18,20 +22,52 @@ class OnboardingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Assets.svgs.settingMan.svg(),
-              Text(
-                "Shape Your Financial Destiny",
-                style: AppTheme.textTheme.displaySmall,
+              Expanded(
+                  child: PageView.builder(
+                onPageChanged: (value) {
+                  context.read<OnboardingBloc>().add(SwipePageEvent(value));
+                },
+                physics: BouncingScrollPhysics(),
+                itemCount: DataProvider.onBoardingPageList.length,
+                itemBuilder: (context, index) {
+                  OnboardingModel model = DataProvider.onBoardingPageList[index];
+                  return _onBoardingPage(context, model);
+                },
+              )),
+              BlocBuilder<OnboardingBloc, OnboardingState>(
+                builder: (context, state) {
+                  return DotIndicator(
+                    count: DataProvider.onBoardingPageList.length,
+                    activeIndex: state.currentPageIndex,
+                    activeColor: AppColors.primary,
+                  );
+                },
               ),
-              SizedBox(height: 12),
-              Text(
-                "Track every rupee and master your spending habits. \n Stay organized and make smarter financial decisions.",
-                style: AppTheme.textTheme.titleSmall,
-                textAlign: TextAlign.center,
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(height: 32),
-              DotIndicator(count: 3, activeIndex: 1, activeColor: AppColors.primary,),
-              Spacer(),
+              DropdownButton<ThemeMode>(
+                value: context.watch<ThemeBloc>().state,
+                onChanged: (newTheme) {
+                  if (newTheme != null) {
+                    context.read<ThemeBloc>().add(ChangeTheme(newTheme));
+                  }
+                },
+                items: const [
+                  DropdownMenuItem(
+                    value: ThemeMode.system,
+                    child: Text("System Default"),
+                  ),
+                  DropdownMenuItem(
+                    value: ThemeMode.light,
+                    child: Text("Light Mode"),
+                  ),
+                  DropdownMenuItem(
+                    value: ThemeMode.dark,
+                    child: Text("Dark Mode"),
+                  ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -41,7 +77,7 @@ class OnboardingScreen extends StatelessWidget {
                         "Skip",
                         style: AppFonts.semiBold(color: AppColors.primary),
                       )),
-                  ElevatedButton.icon(
+                  TextButton.icon(
                     icon: Assets.icons.rightArrowOutline.svg(
                         width: 16,
                         height: 16,
@@ -66,4 +102,21 @@ class OnboardingScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _onBoardingPage(BuildContext context, OnboardingModel model) => Column(
+        children: [
+          SvgPicture.asset(model.svgPath),
+          Text(
+            model.title,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          SizedBox(height: 12),
+          Text(
+            model.tagline,
+            style: Theme.of(context).textTheme.titleSmall,
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 32),
+        ],
+      );
 }

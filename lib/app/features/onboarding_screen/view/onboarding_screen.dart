@@ -1,14 +1,13 @@
 import 'package:expense_manager/app/core/utils/app_colors.dart';
-import 'package:expense_manager/app/core/utils/app_fonts.dart';
-import 'package:expense_manager/app/data/common/bloc/theme_bloc/theme_bloc.dart';
+import 'package:expense_manager/app/core/utils/app_strings.dart';
 import 'package:expense_manager/app/data/provider/data_provider.dart';
+import 'package:expense_manager/app/features/onboarding_screen/cubit/onboarding_cubit.dart';
 import 'package:expense_manager/app/features/onboarding_screen/models/onboarding_model.dart';
 import 'package:expense_manager/app/features/onboarding_screen/widgets/dot_indicators.dart';
-import 'package:expense_manager/gen/assets.gen.dart';
+import 'package:expense_manager/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../bloc/onboarding_bloc.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -25,16 +24,19 @@ class OnboardingScreen extends StatelessWidget {
               Expanded(
                   child: PageView.builder(
                 onPageChanged: (value) {
-                  context.read<OnboardingBloc>().add(SwipePageEvent(value));
+                  context.read<OnboardingCubit>().swipePage(value);
                 },
                 physics: BouncingScrollPhysics(),
                 itemCount: DataProvider.onBoardingPageList.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (pageContext, index) {
                   OnboardingModel model = DataProvider.onBoardingPageList[index];
                   return _onBoardingPage(context, model);
                 },
               )),
-              BlocBuilder<OnboardingBloc, OnboardingState>(
+              SizedBox(
+                height: 30,
+              ),
+              BlocBuilder<OnboardingCubit, OnboardingState>(
                 builder: (context, state) {
                   return DotIndicator(
                     count: DataProvider.onBoardingPageList.length,
@@ -44,58 +46,14 @@ class OnboardingScreen extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 40,
               ),
-              DropdownButton<ThemeMode>(
-                value: context.watch<ThemeBloc>().state,
-                onChanged: (newTheme) {
-                  if (newTheme != null) {
-                    context.read<ThemeBloc>().add(ChangeTheme(newTheme));
-                  }
-                },
-                items: const [
-                  DropdownMenuItem(
-                    value: ThemeMode.system,
-                    child: Text("System Default"),
-                  ),
-                  DropdownMenuItem(
-                    value: ThemeMode.light,
-                    child: Text("Light Mode"),
-                  ),
-                  DropdownMenuItem(
-                    value: ThemeMode.dark,
-                    child: Text("Dark Mode"),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Skip",
-                        style: AppFonts.semiBold(color: AppColors.primary),
-                      )),
-                  TextButton.icon(
-                    icon: Assets.icons.rightArrowOutline.svg(
-                        width: 16,
-                        height: 16,
-                        colorFilter: ColorFilter.mode(
-                          AppColors.primary,
-                          BlendMode.srcIn,
-                        )),
-                    iconAlignment: IconAlignment.end,
-                    onPressed: () {},
-                    style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))), padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16))),
-                    label: Text(
-                      "Next",
-                      style: AppFonts.semiBold(color: AppColors.primary),
-                    ),
-                  )
-                ],
-              )
+              SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.dashboardScreen),
+                    child: Text(AppStrings.letsGo),
+                  )),
             ],
           ),
         ),
@@ -105,7 +63,11 @@ class OnboardingScreen extends StatelessWidget {
 
   Widget _onBoardingPage(BuildContext context, OnboardingModel model) => Column(
         children: [
-          SvgPicture.asset(model.svgPath),
+          SvgPicture.asset(
+            model.svgPath,
+            height: MediaQuery.sizeOf(context).height * .6,
+          ),
+          SizedBox(height: 16),
           Text(
             model.title,
             style: Theme.of(context).textTheme.displaySmall,

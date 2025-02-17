@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Expense Manager',
           debugShowCheckedModeBanner: false,
-          // routes: AppRoutes.appRoutes,
           onGenerateRoute: AppRoutes.generateRoute,
           initialRoute: AppRoutes.splash,
           theme: AppTheme.lightTheme,

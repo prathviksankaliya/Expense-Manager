@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 
 class AppTheme {
-
   // Light Theme
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
@@ -15,15 +14,36 @@ class AppTheme {
     textTheme: AppTextTheme.lightTextTheme,
     elevatedButtonTheme: AppButtonTheme.lightButtonTheme,
     inputDecorationTheme: AppTextFieldTheme.lightInputDecorationTheme,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.surfaceLight,
+      elevation: 10,
+      selectedItemColor: AppColors.primary
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: AppColors.surfaceLight,
+      padding: EdgeInsets.zero,
+      elevation: 10,
+    ),
   );
 
   // Dark Theme
   static ThemeData darkTheme = ThemeData(
-      brightness: Brightness.dark,
-      primaryColor: AppColors.primaryDark,
-      scaffoldBackgroundColor: AppColors.backgroundDark,
-      cardColor: AppColors.surfaceDark,
-      textTheme: AppTextTheme.darkTextTheme,
-      elevatedButtonTheme: AppButtonTheme.darkButtonTheme,
-      inputDecorationTheme: AppTextFieldTheme.darkInputDecorationTheme);
+    brightness: Brightness.dark,
+    primaryColor: AppColors.primaryDark,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
+    cardColor: AppColors.surfaceDark,
+    textTheme: AppTextTheme.darkTextTheme,
+    elevatedButtonTheme: AppButtonTheme.darkButtonTheme,
+    inputDecorationTheme: AppTextFieldTheme.darkInputDecorationTheme,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.surfaceDark,
+      elevation: 10,
+      selectedItemColor: AppColors.primaryDark
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: AppColors.surfaceDark,
+      padding: EdgeInsets.zero,
+      elevation: 10,
+    ),
+  );
 }

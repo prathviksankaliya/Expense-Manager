@@ -14,7 +14,7 @@ class AppTextTheme {
 
     titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textPrimaryLight),
     titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondaryLight),
-    titleSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.black),
+    titleSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.textSecondaryLight),
 
     bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.textPrimaryLight),
     bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondaryLight),
@@ -36,7 +36,7 @@ class AppTextTheme {
 
     titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: AppColors.textPrimaryDark),
     titleMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondaryDark),
-    titleSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white),
+    titleSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color:AppColors.textSecondaryDark),
 
     bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: AppColors.textPrimaryDark),
     bodyMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: AppColors.textSecondaryDark),

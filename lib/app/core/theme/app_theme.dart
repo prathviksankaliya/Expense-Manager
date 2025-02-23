@@ -15,14 +15,15 @@ class AppTheme {
     elevatedButtonTheme: AppButtonTheme.lightButtonTheme,
     inputDecorationTheme: AppTextFieldTheme.lightInputDecorationTheme,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.surfaceLight,
-      elevation: 10,
-      selectedItemColor: AppColors.primary
-    ),
+        backgroundColor: AppColors.surfaceLight,
+        elevation: 12,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: AppTextTheme.lightTextTheme.labelLarge,
+        selectedItemColor: AppColors.primary),
     bottomAppBarTheme: BottomAppBarTheme(
       color: AppColors.surfaceLight,
       padding: EdgeInsets.zero,
-      elevation: 10,
+      elevation: 12,
     ),
   );
 
@@ -36,14 +37,15 @@ class AppTheme {
     elevatedButtonTheme: AppButtonTheme.darkButtonTheme,
     inputDecorationTheme: AppTextFieldTheme.darkInputDecorationTheme,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.surfaceDark,
-      elevation: 10,
-      selectedItemColor: AppColors.primaryDark
-    ),
+        backgroundColor: AppColors.surfaceDark,
+        elevation: 12,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: AppTextTheme.darkTextTheme.labelLarge,
+        selectedItemColor: AppColors.primaryDark),
     bottomAppBarTheme: BottomAppBarTheme(
       color: AppColors.surfaceDark,
       padding: EdgeInsets.zero,
-      elevation: 10,
+      elevation: 12,
     ),
   );
 }

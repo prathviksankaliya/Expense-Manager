@@ -15,6 +15,18 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/bell.svg
+  SvgGenImage get bell => const SvgGenImage('assets/icons/bell.svg');
+
+  /// File path: assets/icons/chart_icon.svg
+  SvgGenImage get chartIcon => const SvgGenImage('assets/icons/chart_icon.svg');
+
+  /// File path: assets/icons/goal.svg
+  SvgGenImage get goal => const SvgGenImage('assets/icons/goal.svg');
+
+  /// File path: assets/icons/house.svg
+  SvgGenImage get house => const SvgGenImage('assets/icons/house.svg');
+
   /// File path: assets/icons/right_arrow.svg
   SvgGenImage get rightArrow =>
       const SvgGenImage('assets/icons/right_arrow.svg');
@@ -23,8 +35,19 @@ class $AssetsIconsGen {
   SvgGenImage get rightArrowOutline =>
       const SvgGenImage('assets/icons/right_arrow_outline.svg');
 
+  /// File path: assets/icons/settings.svg
+  SvgGenImage get settings => const SvgGenImage('assets/icons/settings.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [rightArrow, rightArrowOutline];
+  List<SvgGenImage> get values => [
+    bell,
+    chartIcon,
+    goal,
+    house,
+    rightArrow,
+    rightArrowOutline,
+    settings,
+  ];
 }
 
 class $AssetsImagesGen {
